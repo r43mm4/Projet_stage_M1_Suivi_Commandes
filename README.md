@@ -1,17 +1,39 @@
+Parfait, voici une **version réécrite de ton `README.md` propre, professionnelle et conforme aux conventions standards Open Source** (structure claire, titres normalisés, avertissements sécurité, cohérence technique) 👇
+Tu peux la copier-coller directement dans ton projet.
+
+---
+
+```md
 # Portail Client DigiInfo Solutions
 
-Portail web de consultation des commandes pour les clients B2B de DigiInfo Solutions, intégré avec Salesforce CRM.
+Portail web de consultation des commandes destiné aux clients B2B de **DigiInfo Solutions**, avec intégration complète du CRM **Salesforce** via API REST.
 
-## Architecture
+---
 
+## ✨ Fonctionnalités
+
+- Authentification via OAuth2 Salesforce
+- Consultation des commandes clients
+- Recherche et filtres par statut
+- Statistiques des commandes
+- Détail des commandes (produits, notifications)
+- Déconnexion sécurisée
+
+---
+
+## 🏗️ Architecture
 ```
-Backend: Node.js + Express
-CRM: Salesforce (API REST v58.0)
-Base de données: Azure SQL Database
-Authentification: OAuth2 Salesforce
-```
 
-## Prérequis
+Backend : Node.js + Express
+CRM : Salesforce (API REST v58.0)
+Base de données : Azure SQL Database (optionnelle)
+Authentification : OAuth2 Salesforce
+
+````
+
+---
+
+## ✅ Prérequis
 
 - Node.js >= 18.0.0
 - npm >= 9.0.0
@@ -19,14 +41,16 @@ Authentification: OAuth2 Salesforce
 - Connected App Salesforce configurée
 - Base de données Azure SQL (optionnel)
 
-## Installation
+---
 
-### 1. Cloner le projet
+## 🚀 Installation
+
+### 1. Cloner le dépôt
 
 ```bash
 git clone https://github.com/r43mm4/Projet_stage_M1_Suivi_Commandes.git
 cd Projet_stage_M1_Suivi_Commandes
-```
+````
 
 ### 2. Installer les dépendances
 
@@ -34,12 +58,11 @@ cd Projet_stage_M1_Suivi_Commandes
 npm install
 ```
 
-### 3. Configuration des variables d'environnement
+### 3. Configuration des variables d’environnement
 
-Le fichier `.env` est déjà configuré avec les credentials Salesforce. Vérifier que toutes les variables sont correctes :
+Le fichier `.env` contient les variables nécessaires à la connexion Salesforce.
 
 ```bash
-# Vérifier la configuration
 cat .env
 ```
 
@@ -47,181 +70,216 @@ Variables principales :
 
 - `SF_CLIENT_ID` : Consumer Key de la Connected App
 - `SF_CLIENT_SECRET` : Consumer Secret
-- `SF_INSTANCE_URL` : URL de l'instance Salesforce
-- `PORT` : Port du serveur (3000 par défaut)
+- `SF_INSTANCE_URL` : URL de l’instance Salesforce
+- `PORT` : Port du serveur (par défaut : 3000)
+
+⚠️ **Ne jamais versionner le fichier `.env` en environnement de production.**
+
+---
 
 ### 4. Démarrer le serveur
 
-**Mode développement (avec rechargement automatique) :**
+#### Mode développement
 
 ```bash
 npm run dev
 ```
 
-**Mode production :**
+#### Mode production
 
 ```bash
 npm start
 ```
 
-Le serveur démarre sur `http://localhost:3000`
+Application disponible sur :
 
-## Structure du projet
+```
+http://localhost:3000
+```
+
+---
+
+## 🗂️ Structure du projet
 
 ```
 projet_stage_m1_suivi_commandes/
 ├── src/
 │   ├── middleware/
-│   │   ├── auth.middleware.js      # Authentification et refresh token
-│   │   └── errorHandler.js         # Gestion globale des erreurs
+│   │   ├── auth.middleware.js
+│   │   └── errorHandler.js
 │   ├── routes/
-│   │   ├── auth.js                 # Routes OAuth2
-│   │   ├── clients.js              # Routes infos client
-│   │   └── commandes.js            # Routes gestion commandes
+│   │   ├── auth.js
+│   │   ├── clients.js
+│   │   └── commandes.js
 │   ├── services/
-│   │   └── salesforce.service.js   # Service API Salesforce
-│   └── server.js                   # Point d'entrée serveur
+│   │   └── salesforce.service.js
+│   └── server.js
 ├── public/
 │   ├── css/
-│   │   └── styles.css              # Styles globaux
+│   │   └── styles.css
 │   ├── js/
-│   │   └── app.js                  # Logique frontend
-│   ├── index.html                  # Page liste commandes
-│   ├── login.html                  # Page connexion
-│   └── order-detail.html           # Page détail commande
-├── .env                            # Variables environnement
+│   │   └── app.js
+│   ├── index.html
+│   ├── login.html
+│   └── order-detail.html
+├── .env
 ├── .gitignore
 ├── package.json
 └── README.md
 ```
 
-## API Endpoints
+---
+
+## 🔌 API Endpoints
 
 ### Authentification
 
-- `GET /oauth/authorize` - Redirection vers Salesforce OAuth
-- `GET /oauth/callback` - Callback OAuth après authentification
-- `POST /logout` - Déconnexion utilisateur
-- `GET /auth/status` - Vérifier statut authentification
+| Méthode | Route            | Description                         |
+| ------- | ---------------- | ----------------------------------- |
+| GET     | /oauth/authorize | Redirection vers Salesforce OAuth   |
+| GET     | /oauth/callback  | Retour OAuth après authentification |
+| POST    | /logout          | Déconnexion utilisateur             |
+| GET     | /auth/status     | Vérification statut utilisateur     |
 
 ### Client
 
-- `GET /api/client` - Informations du client connecté
+| Méthode | Route       | Description                  |
+| ------- | ----------- | ---------------------------- |
+| GET     | /api/client | Informations client connecté |
 
 ### Commandes
 
-- `GET /api/orders` - Liste des commandes (avec filtres optionnels)
-- `GET /api/orders/:id` - Détail d'une commande spécifique
-- `GET /api/orders/stats` - Statistiques des commandes
+| Méthode | Route             | Description           |
+| ------- | ----------------- | --------------------- |
+| GET     | /api/orders       | Liste des commandes   |
+| GET     | /api/orders/:id   | Détail d’une commande |
+| GET     | /api/orders/stats | Statistiques globales |
 
-## Utilisation
+---
+
+## 👤 Utilisation
 
 ### 1. Connexion
 
 1. Accéder à `http://localhost:3000`
-2. Cliquer sur "Se connecter avec DigiInfo"
-3. S'authentifier avec credentials Salesforce :
-   - Email : `raoul-emmanu.waffo-fotso852@agentforce.com`
-   - Mot de passe : voir `.env`
+2. Cliquer sur **Se connecter**
+3. S’authentifier via Salesforce
 
-### 2. Consultation des commandes
+### 2. Consultation
 
-Après connexion, l'utilisateur accède à :
+Une fois connecté :
 
-- Liste de toutes ses commandes
+- Liste des commandes
 - Filtres par statut
-- Barre de recherche
-- Détail de chaque commande (produits, notifications)
+- Recherche
+- Accès au détail d’une commande
 
 ### 3. Déconnexion
 
-Cliquer sur le bouton "Déconnexion" dans le header.
-
-## Sécurité
-
-### Mesures implémentées
-
-- **Helmet** : Headers de sécurité HTTP
-- **Rate Limiting** : 100 requêtes/15min par IP
-- **Sessions sécurisées** : HttpOnly cookies
-- **OAuth2** : Authentification déléguée Salesforce
-- **HTTPS** : Obligatoire en production
-- **SOQL Injection** : Validation des entrées
-
-### Variables sensibles
-
-Ne jamais committer le fichier `.env` en production. Utiliser des secrets managers (Azure Key Vault, AWS Secrets Manager).
-
-## Tests
-
-```bash
-# Lancer les tests unitaires
-npm test
-
-# Avec couverture de code
-npm test -- --coverage
-```
-
-## Déploiement
-
-### Azure App Service
-
-Le projet est configuré pour un déploiement sur Azure :
-
-1. Créer un App Service
-2. Configurer les variables d'environnement via le portail Azure
-3. Déployer via Git ou GitHub Actions
-
-```bash
-# Déploiement manuel
-az webapp up --name stagedigiinfo --resource-group stageDigiInfo
-```
-
-## Troubleshooting
-
-### Erreur "Session expired"
-
-L'access token Salesforce expire après 2h. Le middleware `autoRefreshToken` le renouvelle automatiquement. Si le refresh échoue, se reconnecter.
-
-### Erreur "SOQL query failed"
-
-Vérifier :
-
-1. Les noms d'objets et champs Salesforce
-2. Les permissions Field-Level Security
-3. La syntaxe SOQL (pas de quotes autour des IDs)
-
-### Port 3000 déjà utilisé
-
-Changer le port dans `.env` :
-
-```
-PORT=8080
-```
-
-## Documentation complète
-
-Consulter les fichiers de documentation dans le repository :
-
-- `API_INTEGRATION.md` - Documentation API REST Salesforce
-- `FLOWS_DOCUMENTATION.md` - Flows d'automatisation
-- `SALESFORCE_CONFIG.md` - Configuration objets Salesforce
-- `ARCHITECTURE.md` - Architecture système
-
-## Support
-
-Pour toute question :
-
-- Email : raoulemma1999@gmail.com
-- GitHub Issues : [Ouvrir un ticket](https://github.com/r43mm4/Projet_stage_M1_Suivi_Commandes/issues)
-
-## Licence
-
-ISC License - Raoul WAFFO
+Bouton **Déconnexion** disponible dans l’interface.
 
 ---
 
-**Projet académique** - MSc1 Informatique & Management  
-IONIS School of Technology and Management  
-Tuteur : Joly DONFACK  
-Période : 5 septembre - 28 novembre 2025
+## 🔐 Sécurité
+
+### Mesures mises en place
+
+- **Helmet** : sécurisation des en-têtes HTTP
+- **Rate Limiting** : 100 requêtes / 15 min / IP
+- **Sessions sécurisées** : cookies HttpOnly
+- **OAuth2 Salesforce**
+- **HTTPS obligatoire en production**
+- **Protection SOQL Injection** via validation des entrées
+
+### Gestion des secrets
+
+> En production, utiliser un gestionnaire de secrets :
+
+- Azure Key Vault
+- AWS Secrets Manager
+
+---
+
+## 🧪 Tests
+
+```bash
+npm test
+```
+
+```bash
+npm test -- --coverage
+```
+
+---
+
+## ☁️ Déploiement
+
+### Azure App Service
+
+1. Créer un App Service
+2. Ajouter les variables d’environnement
+3. Déployer via Git ou GitHub Actions
+
+```bash
+az webapp up --name stagedigiinfo --resource-group stageDigiInfo
+```
+
+---
+
+## 🛠️ Dépannage
+
+### Session expirée
+
+Le token Salesforce expire automatiquement après 2h.
+Le middleware `autoRefreshToken` gère le rafraîchissement.
+
+### Erreur SOQL
+
+Vérifier :
+
+1. Les noms des champs Salesforce
+2. Les permissions des objets
+3. La syntaxe de la requête
+
+### Port déjà utilisé
+
+Modifier le port dans `.env` :
+
+```env
+PORT=8080
+```
+
+---
+
+## 📚 Documentation complémentaire
+
+- `API_INTEGRATION.md`
+- `FLOWS_DOCUMENTATION.md`
+- `SALESFORCE_CONFIG.md`
+- `ARCHITECTURE.md`
+
+---
+
+## 📞 Support
+
+- 📧 Email : [raoulemma1999@gmail.com](mailto:raoulemma1999@gmail.com)
+- 🐞 Issues : [https://github.com/r43mm4/Projet_stage_M1_Suivi_Commandes/issues](https://github.com/r43mm4/Projet_stage_M1_Suivi_Commandes/issues)
+
+---
+
+## 📄 Licence
+
+ISC License — Raoul WAFFO
+
+---
+
+## 🎓 Contexte académique
+
+**Projet académique** — MSc1 Informatique & Management
+IONIS School of Technology and Management
+Tuteur : Joly DONFACK
+Période : 5 septembre – 28 novembre 2025
+
+```
+
+```

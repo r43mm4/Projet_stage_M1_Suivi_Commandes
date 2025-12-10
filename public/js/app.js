@@ -53,11 +53,11 @@ async function chargerInfoUtilisateur() {
       // Afficher les infos dans l'en-tête
       document.getElementById("info-utilisateur").innerHTML = `
         <div class="info-client">
-          <span class="nom-client">👤 ${client.nom}</span>
+          <span class="nom-client">${client.nom}</span>
           <span class="email-client">${client.email}</span>
         </div>
         <button onclick="seDeconnecter()" class="bouton-deconnexion">
-          🚪 Déconnexion
+          Déconnexion
         </button>
       `;
     }

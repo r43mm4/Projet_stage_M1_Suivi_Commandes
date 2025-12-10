@@ -257,8 +257,8 @@ PORT=8080
 
 ## Support
 
-- 📧 Email : [raoulemma1999@gmail.com](mailto:raoulemma1999@gmail.com)
-- 🐞 Issues : [https://github.com/r43mm4/Projet_stage_M1_Suivi_Commandes/issues](https://github.com/r43mm4/Projet_stage_M1_Suivi_Commandes/issues)
+- Email : [raoulemma1999@gmail.com](mailto:raoulemma1999@gmail.com)
+- Issues : [https://github.com/r43mm4/Projet_stage_M1_Suivi_Commandes/issues](https://github.com/r43mm4/Projet_stage_M1_Suivi_Commandes/issues)
 
 ---
 
@@ -270,9 +270,13 @@ ISC License — Raoul WAFFO
 
 ## Contexte académique
 
-**Projet académique** — MSc1 Informatique & Management
+**Projet académique**
+MSc1 Informatique & Management
+
 IONIS School of Technology and Management
+
 Tuteur : Joly DONFACK
+
 Période : 5 septembre – 28 novembre 2025
 
 ```

@@ -1,16 +1,10 @@
-Parfait, voici une **version réécrite de ton `README.md` propre, professionnelle et conforme aux conventions standards Open Source** (structure claire, titres normalisés, avertissements sécurité, cohérence technique) 👇
-Tu peux la copier-coller directement dans ton projet.
-
----
-
-```md
 # Portail Client DigiInfo Solutions
 
 Portail web de consultation des commandes destiné aux clients B2B de **DigiInfo Solutions**, avec intégration complète du CRM **Salesforce** via API REST.
 
 ---
 
-## ✨ Fonctionnalités
+## Fonctionnalités
 
 - Authentification via OAuth2 Salesforce
 - Consultation des commandes clients
@@ -21,7 +15,8 @@ Portail web de consultation des commandes destiné aux clients B2B de **DigiInfo
 
 ---
 
-## 🏗️ Architecture
+## Architecture
+
 ```
 
 Backend : Node.js + Express
@@ -29,11 +24,11 @@ CRM : Salesforce (API REST v58.0)
 Base de données : Azure SQL Database (optionnelle)
 Authentification : OAuth2 Salesforce
 
-````
+```
 
 ---
 
-## ✅ Prérequis
+## Prérequis
 
 - Node.js >= 18.0.0
 - npm >= 9.0.0
@@ -43,14 +38,14 @@ Authentification : OAuth2 Salesforce
 
 ---
 
-## 🚀 Installation
+## Installation
 
 ### 1. Cloner le dépôt
 
 ```bash
 git clone https://github.com/r43mm4/Projet_stage_M1_Suivi_Commandes.git
 cd Projet_stage_M1_Suivi_Commandes
-````
+```
 
 ### 2. Installer les dépendances
 
@@ -73,7 +68,7 @@ Variables principales :
 - `SF_INSTANCE_URL` : URL de l’instance Salesforce
 - `PORT` : Port du serveur (par défaut : 3000)
 
-⚠️ **Ne jamais versionner le fichier `.env` en environnement de production.**
+  **Ne jamais versionner le fichier `.env` en environnement de production.**
 
 ---
 
@@ -99,7 +94,7 @@ http://localhost:3000
 
 ---
 
-## 🗂️ Structure du projet
+## Structure du projet
 
 ```
 projet_stage_m1_suivi_commandes/
@@ -130,7 +125,7 @@ projet_stage_m1_suivi_commandes/
 
 ---
 
-## 🔌 API Endpoints
+## API Endpoints
 
 ### Authentification
 
@@ -157,7 +152,7 @@ projet_stage_m1_suivi_commandes/
 
 ---
 
-## 👤 Utilisation
+## Utilisation
 
 ### 1. Connexion
 
@@ -180,7 +175,7 @@ Bouton **Déconnexion** disponible dans l’interface.
 
 ---
 
-## 🔐 Sécurité
+## Sécurité
 
 ### Mesures mises en place
 
@@ -200,7 +195,7 @@ Bouton **Déconnexion** disponible dans l’interface.
 
 ---
 
-## 🧪 Tests
+## Tests
 
 ```bash
 npm test
@@ -212,7 +207,7 @@ npm test -- --coverage
 
 ---
 
-## ☁️ Déploiement
+## Déploiement
 
 ### Azure App Service
 
@@ -226,7 +221,7 @@ az webapp up --name stagedigiinfo --resource-group stageDigiInfo
 
 ---
 
-## 🛠️ Dépannage
+## Dépannage
 
 ### Session expirée
 
@@ -251,7 +246,7 @@ PORT=8080
 
 ---
 
-## 📚 Documentation complémentaire
+## Documentation complémentaire
 
 - `API_INTEGRATION.md`
 - `FLOWS_DOCUMENTATION.md`
@@ -260,20 +255,20 @@ PORT=8080
 
 ---
 
-## 📞 Support
+## Support
 
 - 📧 Email : [raoulemma1999@gmail.com](mailto:raoulemma1999@gmail.com)
 - 🐞 Issues : [https://github.com/r43mm4/Projet_stage_M1_Suivi_Commandes/issues](https://github.com/r43mm4/Projet_stage_M1_Suivi_Commandes/issues)
 
 ---
 
-## 📄 Licence
+## Licence
 
 ISC License — Raoul WAFFO
 
 ---
 
-## 🎓 Contexte académique
+## Contexte académique
 
 **Projet académique** — MSc1 Informatique & Management
 IONIS School of Technology and Management

@@ -54,7 +54,7 @@ router.get("/client", async (req, res) => {
       nom: infoClient.Name,
       email: infoClient.Email__c,
       adresse: infoClient.Adresse__c,
-      telephone: infoClient.Téléphone__c,
+      telephone: infoClient.Telephone__c,
     };
 
     res.json({

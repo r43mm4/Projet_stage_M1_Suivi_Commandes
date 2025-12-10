@@ -85,7 +85,7 @@ class SalesforceService {
         await this.obtenirAccessToken();
       }
 
-      console.log("📡 Exécution de la requête SOQL:", requeteSOQL);
+      console.log("Exécution de la requête SOQL:", requeteSOQL);
 
       // Envoi de la requête à Salesforce
       const response = await axios.get(
@@ -186,7 +186,6 @@ class SalesforceService {
         Montant__c,
         Etat__c,
         Date__c,
-        DernièreModificationPar__c,
         Description__c
       FROM Cmd__c
       WHERE Clients__r.Email__c = '${emailClient}'
@@ -240,7 +239,7 @@ class SalesforceService {
         Name,
         Email__c,
         Adresse__c,
-        Téléphone__c
+        Telephone__c
       FROM Clients__c
       WHERE Email__c = '${emailClient}'
       LIMIT 1

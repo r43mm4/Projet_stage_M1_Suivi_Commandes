@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mes Commandes - R_Corp Solutions</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <!-- ============================================ -->
+    <!-- EN-TÊTE (HEADER) -->
+    <!-- ============================================ -->
+    <header class="entete">
+      <div class="conteneur">
+        <div class="entete-gauche">
+          <h1>R_Corp Solutions</h1>
+          <p class="sous-titre">Portail Client</p>
+        </div>
+        <div class="entete-droite" id="info-utilisateur">
+          <!-- Rempli automatiquement par JavaScript -->
+        </div>
+      </div>
+    </header>
+
+    <!-- ============================================ -->
+    <!-- CONTENU PRINCIPAL -->
+    <!-- ============================================ -->
+    <main class="conteneur">
+      <!-- Titre de la page -->
+      <div class="titre-page">
+        <h2>Mes Commandes</h2>
+        <button onclick="actualiser()" class="bouton-secondaire">
+          Actualiser
+        </button>
+      </div>
+
+      <!-- Filtres et recherche -->
+      <div class="section-filtres">
+        <div class="groupe-recherche">
+          <input
+            type="search"
+            id="champ-recherche"
+            placeholder="Rechercher une commande (numéro, montant...)"
+            onkeyup="filtrerCommandes()"
+          />
+        </div>
+        <div class="groupe-filtres">
+          <select id="filtre-etat" onchange="filtrerCommandes()">
+            <option value="">Tous les états</option>
+            <option value="En cours">En cours</option>
+            <option value="Expédié">Expédié</option>
+            <option value="Livré">Livré</option>
+            <option value="Annulé">Annulé</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- ============================================ -->
+      <!-- ZONE DE CHARGEMENT -->
+      <!-- ============================================ -->
+      <div id="loader" class="loader" style="display: block">
+        <div class="spinner"></div>
+        <p>Chargement des commandes...</p>
+      </div>
+
+      <!-- ============================================ -->
+      <!-- MESSAGE D'ERREUR -->
+      <!-- ============================================ -->
+      <div id="message-erreur" class="message-erreur" style="display: none">
+        <!-- Message d'erreur -->
+      </div>
+
+      <!-- ============================================ -->
+      <!-- GRILLE DES COMMANDES -->
+      <!-- ============================================ -->
+      <div id="grille-commandes" class="grille-commandes" style="display: none">
+        <!-- Les cartes de commandes seront insérées ici par JavaScript -->
+      </div>
+
+      <!-- ============================================ -->
+      <!-- MESSAGE : AUCUNE COMMANDE -->
+      <!-- ============================================ -->
+      <div id="message-vide" class="message-vide" style="display: none">
+        <div class="icone-vide">📭</div>
+        <h3>Aucune commande trouvée</h3>
+        <p>Vous n'avez pas encore passé de commande</p>
+      </div>
+    </main>
+
+    <!-- ============================================ -->
+    <!-- PIED DE PAGE (FOOTER) -->
+    <!-- ============================================ -->
+    <footer class="footer">
+      <p>
+        &copy; 2025 R_Corp Solutions -
+        <a href="mailto:contact@R_Corp-solutions.fr">Contact</a>
+      </p>
+    </footer>
+
+    <!-- ============================================ -->
+    <!-- JAVASCRIPT -->
+    <!-- ============================================ -->
+    <script src="/js/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+{
+  "appService.zipIgnorePattern": ["node_modules{,/**}", ".vscode{,/**}"],
+  "appService.defaultWebAppToDeploy": "/subscriptions/46e548b8-1565-4f52-a236-032856292eb1/resourceGroups/stageDigiInfo/providers/Microsoft.Web/sites/stagedigiinfo-api",
+  "appService.deploySubpath": "."
+}

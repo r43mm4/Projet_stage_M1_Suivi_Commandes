@@ -1,27 +1,22 @@
 // ============================================
-// VARIABLES GLOBALES
+// 🎯 VARIABLES GLOBALES
 // ============================================
-let toutesLesCommandes = []; // Stocke toutes les commandes récupérées
-let commandesFiltrees = []; // Stocke les commandes après filtrage
+let toutesLesCommandes = [];
+let commandesFiltrees = [];
 
 // ============================================
-// INITIALISATION AU CHARGEMENT DE LA PAGE
+// 🚀 INITIALISATION
 // ============================================
 window.addEventListener("DOMContentLoaded", async () => {
-  console.log("Chargement de la page...");
+  console.log("Chargement de la page index.html");
 
-  // Vérifier que l'utilisateur est connecté
   await verifierAuthentification();
-
-  // Charger les informations de l'utilisateur
   await chargerInfoUtilisateur();
-
-  // Charger les commandes
   await chargerCommandes();
 });
 
 // ============================================
-// FONCTION : Vérifier l'authentification
+// 🔐 VÉRIFIER AUTHENTIFICATION
 // ============================================
 async function verifierAuthentification() {
   try {
@@ -29,7 +24,6 @@ async function verifierAuthentification() {
     const donnees = await reponse.json();
 
     if (!donnees.connecte) {
-      // Pas connecté → redirection vers login
       console.log("Utilisateur non connecté, redirection...");
       window.location.href = "/login.html";
     }
@@ -40,7 +34,7 @@ async function verifierAuthentification() {
 }
 
 // ============================================
-// 👤 FONCTION : Charger les infos utilisateur
+// 👤 CHARGER INFOS UTILISATEUR
 // ============================================
 async function chargerInfoUtilisateur() {
   try {
@@ -50,16 +44,20 @@ async function chargerInfoUtilisateur() {
     if (donnees.success) {
       const client = donnees.data;
 
-      // Afficher les infos dans l'en-tête
       document.getElementById("info-utilisateur").innerHTML = `
         <div class="info-client">
           <span class="nom-client">${client.nom}</span>
           <span class="email-client">${client.email}</span>
         </div>
-        <button onclick="seDeconnecter()" class="bouton-deconnexion">
+        <button id="btn-deconnexion" class="bouton-deconnexion">
           Déconnexion
         </button>
       `;
+
+      // Attacher l'événement au bouton
+      document
+        .getElementById("btn-deconnexion")
+        .addEventListener("click", seDeconnecter);
     }
   } catch (erreur) {
     console.error("Erreur chargement info client:", erreur);
@@ -67,7 +65,7 @@ async function chargerInfoUtilisateur() {
 }
 
 // ============================================
-// FONCTION : Charger les commandes
+// CHARGER COMMANDES
 // ============================================
 async function chargerCommandes() {
   const loader = document.getElementById("loader");
@@ -76,7 +74,6 @@ async function chargerCommandes() {
   const messageErreur = document.getElementById("message-erreur");
 
   try {
-    // Afficher le loader
     loader.style.display = "block";
     grilleCommandes.style.display = "none";
     messageVide.style.display = "none";
@@ -84,11 +81,9 @@ async function chargerCommandes() {
 
     console.log("Récupération des commandes...");
 
-    // Appel API
     const reponse = await fetch("/api/commandes");
     const donnees = await reponse.json();
 
-    // Masquer le loader
     loader.style.display = "none";
 
     if (donnees.success) {
@@ -98,10 +93,8 @@ async function chargerCommandes() {
       console.log(`${toutesLesCommandes.length} commande(s) récupérée(s)`);
 
       if (toutesLesCommandes.length === 0) {
-        // Aucune commande
         messageVide.style.display = "block";
       } else {
-        // Afficher les commandes
         afficherCommandes(toutesLesCommandes);
         grilleCommandes.style.display = "grid";
       }
@@ -110,7 +103,6 @@ async function chargerCommandes() {
     }
   } catch (erreur) {
     console.error("Erreur chargement commandes:", erreur);
-
     loader.style.display = "none";
     messageErreur.style.display = "block";
     messageErreur.textContent =
@@ -119,18 +111,15 @@ async function chargerCommandes() {
 }
 
 // ============================================
-// FONCTION : Afficher les commandes
+// AFFICHER COMMANDES
 // ============================================
 function afficherCommandes(commandes) {
   const grilleCommandes = document.getElementById("grille-commandes");
 
-  // Générer le HTML pour chaque commande
   const html = commandes
     .map(
       (commande) => `
-    <div class="carte-commande" onclick="voirDetail('${commande.id}')">
-      
-      <!-- En-tête de la carte -->
+    <div class="carte-commande">
       <div class="carte-entete">
         <h3 class="numero-commande">${commande.numeroCommande}</h3>
         <span class="badge badge-${obtenirClasseEtat(commande.etat)}">
@@ -138,7 +127,6 @@ function afficherCommandes(commandes) {
         </span>
       </div>
 
-      <!-- Corps de la carte -->
       <div class="carte-corps">
         <div class="info-ligne">
           <span class="libelle">Montant :</span>
@@ -160,23 +148,29 @@ function afficherCommandes(commandes) {
         }
       </div>
 
-      <!-- Pied de la carte -->
       <div class="carte-pied">
-        <button class="bouton-detail">
+        <button class="bouton-detail" data-id="${commande.id}">
           Voir le détail →
         </button>
       </div>
-
     </div>
   `
     )
     .join("");
 
   grilleCommandes.innerHTML = html;
+
+  // Attacher les événements aux boutons
+  document.querySelectorAll(".bouton-detail").forEach((bouton) => {
+    bouton.addEventListener("click", function () {
+      const idCommande = this.getAttribute("data-id");
+      voirDetail(idCommande);
+    });
+  });
 }
 
 // ============================================
-// FONCTION : Filtrer les commandes
+// FILTRER COMMANDES
 // ============================================
 function filtrerCommandes() {
   const recherche = document
@@ -186,16 +180,13 @@ function filtrerCommandes() {
 
   console.log(`Filtrage: recherche="${recherche}", état="${filtreEtat}"`);
 
-  // Appliquer les filtres
   commandesFiltrees = toutesLesCommandes.filter((commande) => {
-    // Filtre par recherche
     const correspondRecherche =
       commande.numeroCommande.toLowerCase().includes(recherche) ||
       (commande.description &&
         commande.description.toLowerCase().includes(recherche)) ||
       commande.montant.toString().includes(recherche);
 
-    // Filtre par état
     const correspondEtat = filtreEtat === "" || commande.etat === filtreEtat;
 
     return correspondRecherche && correspondEtat;
@@ -203,7 +194,6 @@ function filtrerCommandes() {
 
   console.log(`${commandesFiltrees.length} commande(s) après filtrage`);
 
-  // Afficher les résultats
   if (commandesFiltrees.length === 0) {
     document.getElementById("grille-commandes").style.display = "none";
     document.getElementById("message-vide").style.display = "block";
@@ -215,7 +205,7 @@ function filtrerCommandes() {
 }
 
 // ============================================
-// FONCTION : Actualiser la page
+// ACTUALISER
 // ============================================
 async function actualiser() {
   console.log("Actualisation...");
@@ -223,23 +213,21 @@ async function actualiser() {
 }
 
 // ============================================
-// FONCTION : Voir le détail d'une commande
+// VOIR DÉTAIL
 // ============================================
 function voirDetail(idCommande) {
   console.log(`Navigation vers détail commande ${idCommande}`);
-  window.location.href = `/order-detail.html?id=${idCommande}`;
+  alert(`Détail de la commande ${idCommande}\n\n(Page de détail à créer)`);
 }
 
 // ============================================
-// FONCTION : Se déconnecter
+// DÉCONNEXION
 // ============================================
 async function seDeconnecter() {
   if (confirm("Voulez-vous vraiment vous déconnecter ?")) {
     try {
       console.log("Déconnexion...");
-
       await fetch("/api/logout", { method: "POST" });
-
       console.log("Déconnexion réussie");
       window.location.href = "/login.html";
     } catch (erreur) {
@@ -250,27 +238,19 @@ async function seDeconnecter() {
 }
 
 // ============================================
-// FONCTIONS UTILITAIRES
+// UTILITAIRES
 // ============================================
 
-/**
- * Formate un montant en euros
- */
 function formaterMontant(montant) {
   if (!montant) return "0,00 €";
-
   return new Intl.NumberFormat("fr-FR", {
     style: "currency",
     currency: "EUR",
   }).format(montant);
 }
 
-/**
- * Formate une date au format français
- */
 function formaterDate(dateString) {
   if (!dateString) return "-";
-
   const date = new Date(dateString);
   return new Intl.DateTimeFormat("fr-FR", {
     day: "2-digit",
@@ -279,9 +259,6 @@ function formaterDate(dateString) {
   }).format(date);
 }
 
-/**
- * Retourne la classe CSS correspondant à un état
- */
 function obtenirClasseEtat(etat) {
   const mapping = {
     "En cours": "en-cours",
@@ -289,6 +266,9 @@ function obtenirClasseEtat(etat) {
     Livré: "livre",
     Annulé: "annule",
   };
-
   return mapping[etat] || "defaut";
 }
+
+// Rendre les fonctions globales pour les inputs
+window.filtrerCommandes = filtrerCommandes;
+window.actualiser = actualiser;

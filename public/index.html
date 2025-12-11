@@ -17,7 +17,7 @@
           <p class="sous-titre">Portail Client</p>
         </div>
         <div class="entete-droite" id="info-utilisateur">
-          <!-- Rempli automatiquement par JavaScript -->
+          <div class="spinner"></div>
         </div>
       </div>
     </header>
@@ -29,7 +29,7 @@
       <!-- Titre de la page -->
       <div class="titre-page">
         <h2>Mes Commandes</h2>
-        <button onclick="actualiser()" class="bouton-secondaire">
+        <button id="btn-actualiser" class="bouton-secondaire">
           Actualiser
         </button>
       </div>
@@ -41,11 +41,10 @@
             type="search"
             id="champ-recherche"
             placeholder="Rechercher une commande (numéro, montant...)"
-            onkeyup="filtrerCommandes()"
           />
         </div>
         <div class="groupe-filtres">
-          <select id="filtre-etat" onchange="filtrerCommandes()">
+          <select id="filtre-etat">
             <option value="">Tous les états</option>
             <option value="En cours">En cours</option>
             <option value="Expédié">Expédié</option>
@@ -66,16 +65,20 @@
       <!-- ============================================ -->
       <!-- MESSAGE D'ERREUR -->
       <!-- ============================================ -->
-      <div id="message-erreur" class="message-erreur" style="display: none">
-        <!-- Message d'erreur -->
-      </div>
+      <div
+        id="message-erreur"
+        class="message-erreur"
+        style="display: none"
+      ></div>
 
       <!-- ============================================ -->
       <!-- GRILLE DES COMMANDES -->
       <!-- ============================================ -->
-      <div id="grille-commandes" class="grille-commandes" style="display: none">
-        <!-- Les cartes de commandes seront insérées ici par JavaScript -->
-      </div>
+      <div
+        id="grille-commandes"
+        class="grille-commandes"
+        style="display: none"
+      ></div>
 
       <!-- ============================================ -->
       <!-- MESSAGE : AUCUNE COMMANDE -->
@@ -93,7 +96,7 @@
     <footer class="footer">
       <p>
         &copy; 2025 R_Corp Solutions -
-        <a href="mailto:contact@R_Corp-solutions.fr">Contact</a>
+        <a href="mailto:contact@rcorp-solutions.fr">Contact</a>
       </p>
     </footer>
 
@@ -101,5 +104,27 @@
     <!-- JAVASCRIPT -->
     <!-- ============================================ -->
     <script src="/js/app.js"></script>
+    <script>
+      // Attacher les événements après le chargement
+      document.addEventListener("DOMContentLoaded", () => {
+        // Bouton actualiser
+        const btnActualiser = document.getElementById("btn-actualiser");
+        if (btnActualiser) {
+          btnActualiser.addEventListener("click", actualiser);
+        }
+
+        // Champ de recherche
+        const champRecherche = document.getElementById("champ-recherche");
+        if (champRecherche) {
+          champRecherche.addEventListener("keyup", filtrerCommandes);
+        }
+
+        // Select filtre état
+        const filtreEtat = document.getElementById("filtre-etat");
+        if (filtreEtat) {
+          filtreEtat.addEventListener("change", filtrerCommandes);
+        }
+      });
+    </script>
   </body>
 </html>
